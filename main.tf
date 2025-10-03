@@ -19,6 +19,7 @@ resource "aws_instance" "ec2" {
 }
 
 
+
 resource "aws_security_group" "sg" {
   name        = "Only allow ssh and http"
   description = "create the sg"
