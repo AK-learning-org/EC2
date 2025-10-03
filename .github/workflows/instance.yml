@@ -1,22 +1,20 @@
-name: Create EC2 instance
+name: Terraform Apply GKE-Cluster
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - development
   pull_request:
     branches:
-      - development
-
-env:
-  AWS_REGION: us-east-1
-  TF_WORKING_DIR: .
+      - main
+    types:
+      - closed
 
 jobs:
   terraform:
-    name: Terraform Deployment
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'development'
     runs-on: ubuntu-latest
+
+    env:
+      AWS_REGION: us-east-1
+      TF_WORKING_DIR: .
 
     steps:
       - name: Checkout Repository
@@ -26,7 +24,6 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.9.5
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
