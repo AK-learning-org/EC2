@@ -4,14 +4,14 @@ resource "aws_instance" "ec2" {
   key_name               = "jill1"
   vpc_security_group_ids = [aws_security_group.sg.id]
 
-#  user_data =  <<-EOF
-#    #!/bin/bash
-#    sudo yum update -y
-#    sudo yum install -y httpd
-#    sudo systemctl start httpd
-#    sudo systemctl enable httpd
-#    echo "Welcome browser" > /var/www/html/index.html
-#  EOF
+ user_data =  <<-EOF
+   #!/bin/bash
+   sudo yum update -y
+   sudo yum install -y httpd
+   sudo systemctl start httpd
+   sudo systemctl enable httpd
+   echo "Welcome browser" > /var/www/html/index.html
+ EOF
 
   tags = {
     Name = "MyEC2Instance"
