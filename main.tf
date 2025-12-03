@@ -1,7 +1,7 @@
 resource "aws_instance" "ec2" {
-  ami                    = "ami-0e58b56aa4d64231b"  # Update with valid AMI if needed
-  instance_type          = "t2.micro"
-  key_name               = "jill1"
+  ami                    = var.ami
+  instance_type          = var.type
+  key_name               = var.key
   vpc_security_group_ids = [aws_security_group.sg.id]
 
  user_data =  <<-EOF
